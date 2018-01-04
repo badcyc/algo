@@ -1,0 +1,36 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+D:/cyc20/Clion/Graph/Queue.cpp
+Queue.h
+D:/cyc20/Clion/Graph/Queue.h
+
+D:/cyc20/Clion/Graph/Queue.h
+graph.h
+D:/cyc20/Clion/Graph/graph.h
+
+D:/cyc20/Clion/Graph/graph.cpp
+graph.h
+D:/cyc20/Clion/Graph/graph.h
+Queue.h
+D:/cyc20/Clion/Graph/Queue.h
+
+D:/cyc20/Clion/Graph/graph.h
+stdio.h
+D:/cyc20/Clion/Graph/stdio.h
+string.h
+D:/cyc20/Clion/Graph/string.h
+stdlib.h
+D:/cyc20/Clion/Graph/stdlib.h
+
+D:/cyc20/Clion/Graph/main.cpp
+iostream
+-
+graph.h
+D:/cyc20/Clion/Graph/graph.h
+
