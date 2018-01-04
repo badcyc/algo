@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+D:/cyc20/Clion/linklist/linklist.cpp
+linklist.h
+D:/cyc20/Clion/linklist/linklist.h
+
+D:/cyc20/Clion/linklist/linklist.h
+stdio.h
+-
+string.h
+-
+stdlib.h
+-
+
+D:/cyc20/Clion/linklist/main.cpp
+linklist.h
+D:/cyc20/Clion/linklist/linklist.h
+
