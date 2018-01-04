@@ -1,3 +1,0 @@
-"D:\CLion 2017.2.3\bin\cmake\bin\cmake.exe" -E remove -f CMakeFiles\LinkBinaryTree.dir/objects.a
-D:\MinGw\mingw64\bin\ar.exe cr CMakeFiles\LinkBinaryTree.dir/objects.a @CMakeFiles\LinkBinaryTree.dir\objects1.rsp
-D:\MinGw\mingw64\bin\g++.exe -g   -Wl,--whole-archive CMakeFiles\LinkBinaryTree.dir/objects.a -Wl,--no-whole-archive  -o LinkBinaryTree.exe -Wl,--out-implib,libLinkBinaryTree.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\LinkBinaryTree.dir\linklibs.rsp
