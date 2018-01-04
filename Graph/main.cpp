@@ -1,6 +1,6 @@
 #include <iostream>
 #include "graph.h"
-Status visi(VertexType v){
+Status equal(VertexType v){
     printf("%c ",v);
     return OK;
 }
@@ -23,7 +23,7 @@ int main() {
         printf("    	11.DeleteArc          12.DFSTraverse \n");
         printf("    	13.BFSTraverse        0. Exit\n");
         printf("-------------------------------------------------\n");
-        printf("    è¯·é€‰æ‹©ä½ çš„æ“ä½œ[0~13]:");
+        printf("    ÇëÑ¡ÔñÄãµÄ²Ù×÷[0~13]:");
         scanf("%d%*c", &op);
         switch (op) {
             case 1:
@@ -33,24 +33,24 @@ int main() {
                 break;
             case 2:
                 DestroyGraph(G);
-                printf("é”€æ¯æˆåŠŸ");
+                printf("Ïú»Ù³É¹¦");
                 getchar();
                 getchar();
                 break;
             case 3:
-                printf("è¯·è¾“å…¥ä½ è¦æŸ¥æ‰¾çš„èŠ‚ç‚¹å€¼(charå‹)");
+                printf("ÇëÊäÈëÄãÒª²éÕÒµÄ½ÚµãÖµ(charĞÍ)");
                 scanf("%c", &v);
                 locate = LocateVex(G, v);
                 if (locate < 0) {
-                    printf("æ²¡æœ‰æ‰¾åˆ°");
+                    printf("Ã»ÓĞÕÒµ½");
                 } else {
-                    printf("æ­¤ä¸ºåˆ›å»ºæ—¶çš„ç¬¬%dä¸ª", locate);
+                    printf("´ËÎª´´½¨Ê±µÄµÚ%d¸ö", locate);
                 }
                 getchar();
                 getchar();
                 break;
             case 4:
-                printf("è¯·è¾“å…¥vçš„å€¼ï¼ˆ0=<v<%dï¼‰:", G.vexnum);
+                printf("ÇëÊäÈëvµÄÖµ£¨0=<v<%d£©:", G.vexnum);
                 scanf("%d", &locate);
                 v = GetVex(G, locate);
                 printf("%c", v);
@@ -58,13 +58,13 @@ int main() {
                 getchar();
                 break;
             case 5:
-                printf("è¯·è¾“å…¥ä½ è¦ä¿®æ”¹å‰çš„å€¼ï¼š");
+                printf("ÇëÊäÈëÄãÒªĞŞ¸ÄÇ°µÄÖµ£º");
                 scanf("%c",&v);getchar();
-                printf("è¯·è¾“å…¥ä½ è¦ä¿®æ”¹åçš„å€¼ï¼š");
+                printf("ÇëÊäÈëÄãÒªĞŞ¸ÄºóµÄÖµ£º");
                 scanf("%c",&value);getchar();
                 locate=PutVex(G,v,value);
                 if (locate==OK){
-                    printf("ä¿®æ”¹æˆåŠŸ");
+                    printf("ĞŞ¸Ä³É¹¦");
                 }
                 getchar();
                 getchar();
@@ -83,9 +83,8 @@ int main() {
             case 11:
                 break;
             case 12:
-                printf("éå†ç»“æœä¸ºï¼š");
-                DFSTraverse(G,visi);
-
+                printf("±éÀú½á¹ûÎª£º");
+                DFSTraverse(G,equal);
                 getchar();
                 getchar();
                 break;
@@ -95,7 +94,7 @@ int main() {
                 break;
         }//end of switch
     }//end of while
-    printf("    æ¬¢è¿ä¸‹æ¬¡å†ä½¿ç”¨æœ¬ç³»ç»Ÿï¼\n");
+    printf("    »¶Ó­ÏÂ´ÎÔÙÊ¹ÓÃ±¾ÏµÍ³£¡\n");
     return 0;
 }//end of main()
 

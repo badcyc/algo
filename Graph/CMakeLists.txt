@@ -4,4 +4,4 @@ project(Graph)
 set(CMAKE_CXX_STANDARD 11)
 
 set(SOURCE_FILES main.cpp graph.h graph.cpp Queue.cpp Queue.h)
-add_executable(Graph ${SOURCE_FILES} graph.cpp graph.h)
+add_executable(Graph ${SOURCE_FILES})

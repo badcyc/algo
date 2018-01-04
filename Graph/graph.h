@@ -5,9 +5,7 @@
 #ifndef GRAPH_GRAPH_H
 #define GRAPH_GRAPH_H
 
-
 #include "stdio.h"
-#include "string.h"
 #include "stdlib.h"
 
 #define MAX_VERTEX_NUM 20
@@ -17,6 +15,7 @@
 #define OK 1
 #define OVERFLOW -2
 typedef int Status;
+
 typedef char VertexType;
 typedef char InfoType;
 
@@ -114,11 +113,9 @@ Status InsertArc(AMLGraph &G,VertexType v,VertexType w);
 /**
  *
  */
-bool visit[MAX_VERTEX_NUM]; // 访问标志数组(全局量)
-Status(*VisitFunc)(VertexType v);
+
 void DFS(AMLGraph G,int v);
 void DFSTraverse(AMLGraph G,Status(*vis)(VertexType));
 void BFSTraverse(AMLGraph G,Status(*Vis)(VertexType));
-void MarkUnvizited(AMLGraph G);
-void Display(AMLGraph G);
+
 #endif //GRAPH_GRAPH_H

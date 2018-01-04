@@ -2,8 +2,8 @@
 // Created by cyc20 on 2017/12/20.
 //
 
-#ifndef LINKBINARYTREE_QUEUE_H
-#define LINKBINARYTREE_QUEUE_H
+#ifndef GRAPH_QUEUE_H
+#define GRAPH_QUEUE_H
 
 #include "graph.h"
 

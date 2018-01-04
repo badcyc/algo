@@ -6,28 +6,29 @@
 #include "graph.h"
 #include "Queue.h"
 
-
-
 /**
- *é‡‡ç”¨é‚»æ¥å¤šé‡è¡¨å­˜å‚¨ç»“æ„ï¼Œæ„é€ æ— å‘å›¾
+ *²ÉÓÃÁÚ½Ó¶àÖØ±í´æ´¢½á¹¹£¬¹¹ÔìÎŞÏòÍ¼
  * @param G
  * @return
  */
+bool visit[MAX_VERTEX_NUM]; // ·ÃÎÊ±êÖ¾Êı×é(È«¾ÖÁ¿)
+Status(*Func)(VertexType v);
 Status CreateGraph(AMLGraph &G) {
     int i, j, IncInfo;
     char s;
     VertexType va, vb;
     EBox *p;
-    printf("è¯·è¾“å…¥æ— å‘å›¾Gçš„é¡¶ç‚¹æ•°,è¾¹æ•°,è¾¹æ˜¯å¦å«å…¶å®ƒä¿¡æ¯(æ˜¯:1ï¼Œå¦:0): ");
-    scanf("%d %d %d", &G.vexnum, &G.edgenum, &IncInfo);
-    printf("è¯·è¾“å…¥%dä¸ªé¡¶ç‚¹çš„å€¼(1ä¸ªæ•°å­—):\n", G.vexnum);
+    printf("ÇëÊäÈëÎŞÏòÍ¼GµÄ¶¥µãÊı,±ßÊı,±ßÊÇ·ñº¬ÆäËüĞÅÏ¢(ÊÇ:1£¬·ñ:0): ");
+    scanf("%d %d %d", &G.vexnum, &G.edgenum, &IncInfo);getchar();
+    printf("ÇëÊäÈë%d¸ö¶¥µãµÄÖµ(Ò»´Î1¸ö×Ö·û):\n", G.vexnum);
     for (int m = 0; m < G.vexnum; ++m) {
         scanf("%c", &G.adjmulist[m].data);
+        getchar();
         G.adjmulist[m].firstedge = NULL;
     }
-    printf("è¯·é¡ºåºè¾“å…¥æ¯æ¡è¾¹çš„ä¸¤ä¸ªç«¯ç‚¹(ä»¥ç©ºæ ¼ä½œä¸ºé—´éš”):\n");
+    printf("ÇëË³ĞòÊäÈëÃ¿Ìõ±ßµÄÁ½¸ö¶Ëµã(ÒÔ¿Õ¸ñ×÷Îª¼ä¸ô):\n");
     for (int k = 0; k < G.edgenum; ++k) {
-        scanf("%c%c", &va, &vb);
+        scanf("%c%c", &va, &vb);getchar();
         i = LocateVex(G, va);
         j = LocateVex(G, vb);
         p = (EBox *) malloc(sizeof(EBox));
@@ -40,7 +41,7 @@ Status CreateGraph(AMLGraph &G) {
         p->jlink = G.adjmulist[j].firstedge;
         G.adjmulist[j].firstedge = p;
         if (IncInfo) {
-            printf("è¯·è¾“å…¥è¯¥å¼§çš„ç›¸å…³ä¿¡æ¯(1ä¸ªå­—ç¬¦)ï¼š");
+            printf("ÇëÊäÈë¸Ã»¡µÄÏà¹ØĞÅÏ¢(1¸ö×Ö·û)£º");
             scanf("%c", &s);
             getchar();
             p->info = s;
@@ -52,7 +53,7 @@ Status CreateGraph(AMLGraph &G) {
 int LocateVex(AMLGraph G, VertexType u) {
     int j;
     for (j = 0; j < G.vexnum; ++j) {
-        if (u == G.adjmulist[j].data == 0) {
+        if (u == G.adjmulist[j].data) {
             return j;
         }
     }
@@ -71,7 +72,7 @@ Status PutVex(AMLGraph &G, VertexType v, VertexType value) {
     int i;
     i = LocateVex(G, v);
     if (i < 0) {
-        printf("æ²¡æœ‰æ‰¾åˆ°");
+        printf("Ã»ÓĞÕÒµ½");
         return ERROR;
     }
     G.adjmulist[i].data = value;
@@ -82,7 +83,7 @@ int FirstAdjVex(AMLGraph G, VertexType v) {
     int i;
     i = LocateVex(G, v);
     if (i < 0) {
-        printf("æ²¡æœ‰è¿™ä¸ªé¡¶ç‚¹");
+        printf("Ã»ÓĞÕâ¸ö¶¥µã");
         return ERROR;
     }
     if (G.adjmulist[i].firstedge) {
@@ -90,7 +91,7 @@ int FirstAdjVex(AMLGraph G, VertexType v) {
             return G.adjmulist[i].firstedge->jvex;
         } else return G.adjmulist[i].firstedge->ivex;
     } else {
-        printf("æ²¡æœ‰é‚»æ¥é¡¶ç‚¹");
+        printf("Ã»ÓĞÁÚ½Ó¶¥µã");
         return ERROR;
     }
 }
@@ -102,7 +103,7 @@ int NextAdjVex(AMLGraph G, VertexType v, VertexType w) {
     j = LocateVex(G, w);
 
     if (i < 0 || j < 0) {
-        printf("è¾“å…¥çš„é¡¶ç‚¹ä¸å­˜åœ¨");
+        printf("ÊäÈëµÄ¶¥µã²»´æÔÚ");
         return ERROR;
     }
     p = G.adjmulist[i].firstedge;
@@ -134,11 +135,11 @@ int NextAdjVex(AMLGraph G, VertexType v, VertexType w) {
 
 Status InsertVex(AMLGraph &G, VertexType v) {
     if (G.vexnum == MAX_VERTEX_NUM) {
-        printf("èŠ‚ç‚¹å·²æ»¡ï¼Œä¸èƒ½æ’å…¥");
+        printf("½ÚµãÒÑÂú£¬²»ÄÜ²åÈë");
         return ERROR;
     }
     if (LocateVex(G, v) > 0) {
-        printf("èŠ‚ç‚¹å·²å­˜åœ¨ï¼Œä¸èƒ½æ’å…¥");
+        printf("½ÚµãÒÑ´æÔÚ£¬²»ÄÜ²åÈë");
         return ERROR;
     }
     G.adjmulist[G.vexnum].data = v;
@@ -153,7 +154,7 @@ Status DeleteVex(AMLGraph &G, VertexType v) {
     EBox *p;
     i = LocateVex(G, v);
     if (i < 0) {
-        printf("æ²¡æœ‰æ­¤èŠ‚ç‚¹");
+        //printf("Ã»ÓĞ´Ë½Úµã");
         return ERROR;
     }
     for (int j = 0; j < G.vexnum; ++j) {
@@ -176,7 +177,6 @@ Status DeleteVex(AMLGraph &G, VertexType v) {
                 p = p->jlink;
             }
         }
-
     }
     return OK;
 }
@@ -187,20 +187,20 @@ Status DeleteArc(AMLGraph &G, VertexType v, VertexType w) {
     i = LocateVex(G, v);
     j = LocateVex(G, w);
     if (i < 0 || j < 0 || i == j) {
-        printf("é¡¶ç‚¹ä¸å­˜åœ¨");
+       // printf("¶¥µã²»´æÔÚ");
         return ERROR;
     }
     p = G.adjmulist[i].firstedge;
-    if (p && p->jvex == j) {   //ç¬¬ä¸€æ¡å³ä¸º
+    if (p && p->jvex == j) {   //µÚÒ»Ìõ¼´Îª
         G.adjmulist[i].firstedge = p->ilink;
-    } else if (p && p->ivex == j) {      //ç¬¬ä¸€æ¡å³ä¸º
+    } else if (p && p->ivex == j) {      //µÚÒ»Ìõ¼´Îª
         G.adjmulist[i].firstedge = p->jlink;
     }
     while (p) {
         if (p->ivex == i && p->jvex != j) {
             q = p;
             p = p->ilink;
-        } else if (p->jvex == j && p->ivex != i) {
+        } else if (p->jvex == i && p->ivex != j) {
             q = p;
             p = p->jlink;
         } else {
@@ -208,7 +208,7 @@ Status DeleteArc(AMLGraph &G, VertexType v, VertexType w) {
         }
     }
     if (p == NULL) {
-        printf("æ²¡æœ‰æ‰¾åˆ°è¯¥å¼§");
+        printf("Ã»ÓĞÕÒµ½¸Ã»¡");
         return ERROR;
     }
     if (p->ivex == i && p->jvex == j) {
@@ -232,26 +232,26 @@ Status DeleteArc(AMLGraph &G, VertexType v, VertexType w) {
         G.adjmulist[j].firstedge = p->jlink;
         free(p);
     } else {
-        while (p) // å‘åæŸ¥æ‰¾å¼§<v,w>
-            if (p->ivex == j && p->jvex != i) // ä¸æ˜¯å¾…åˆ é™¤è¾¹
+        while (p) // Ïòºó²éÕÒ»¡<v,w>
+            if (p->ivex == j && p->jvex != i) // ²»ÊÇ´ıÉ¾³ı±ß
             {
                 q = p;
-                p = p->ilink; // æ‰¾ä¸‹ä¸€ä¸ªé‚»æ¥é¡¶ç‚¹
-            } else if (p->jvex == j && p->ivex != i) // ä¸æ˜¯å¾…åˆ é™¤è¾¹
+                p = p->ilink; // ÕÒÏÂÒ»¸öÁÚ½Ó¶¥µã
+            } else if (p->jvex == j && p->ivex != i) // ²»ÊÇ´ıÉ¾³ı±ß
             {
                 q = p;
-                p = p->jlink; // æ‰¾ä¸‹ä¸€ä¸ªé‚»æ¥é¡¶ç‚¹
-            } else // æ˜¯é‚»æ¥é¡¶ç‚¹v
+                p = p->jlink; // ÕÒÏÂÒ»¸öÁÚ½Ó¶¥µã
+            } else // ÊÇÁÚ½Ó¶¥µãv
                 break;
 
-        if (p->ivex == i && p->jvex == j) // æ‰¾åˆ°å¼§<v,w>(æƒ…å†µ1)
+        if (p->ivex == i && p->jvex == j) // ÕÒµ½»¡<v,w>(Çé¿ö1)
         {
             if (q->ivex == j)
                 q->ilink = p->jlink;
             else
                 q->jlink = p->jlink;
             free(p);
-        } else if (p->ivex == j && p->jvex == i) // æ‰¾åˆ°å¼§<v,w>(æƒ…å†µ2)
+        } else if (p->ivex == j && p->jvex == i) // ÕÒµ½»¡<v,w>(Çé¿ö2)
         {
             if (q->ivex == j)
                 q->ilink = p->ilink;
@@ -279,7 +279,7 @@ Status InsertArc(AMLGraph &G, VertexType v, VertexType w) {
     i = LocateVex(G, v);
     j = LocateVex(G, w);
     if (i < 0 || j < 0) {
-        printf("æ²¡æœ‰æ‰¾åˆ°");
+        printf("Ã»ÓĞÕÒµ½");
         return ERROR;
     }
     p = (EBox *) malloc(sizeof(EBox));
@@ -291,11 +291,11 @@ Status InsertArc(AMLGraph &G, VertexType v, VertexType w) {
     G.adjmulist[i].firstedge = p;
     p->jlink = G.adjmulist[j].firstedge;
     G.adjmulist[j].firstedge = p;
-    printf("è¯¥è¾¹æ˜¯å¦æœ‰ç›¸å…³ä¿¡æ¯(1.æœ‰ 0.æ— )");
+    printf("¸Ã±ßÊÇ·ñÓĞÏà¹ØĞÅÏ¢(1.ÓĞ 0.ÎŞ)");
     scanf("%d", &IncInfo);
     getchar();
     if (IncInfo) {
-        printf("è¯·è¾“å…¥è¯¥è¾¹çš„ç›¸å…³ä¿¡æ¯(1ä¸ªå­—ç¬¦)ï¼š");
+        printf("ÇëÊäÈë¸Ã±ßµÄÏà¹ØĞÅÏ¢(1¸ö×Ö·û)£º");
         scanf("%c", &p->info);
     }
     G.edgenum++;
@@ -305,7 +305,7 @@ Status InsertArc(AMLGraph &G, VertexType v, VertexType w) {
 void DFS(AMLGraph G, int v) {
     int j;
     EBox *p;
-    VisitFunc(G.adjmulist[v].data);
+    Func(G.adjmulist[v].data);
     visit[v] = true;
     p = G.adjmulist[v].firstedge;
     while (p) {
@@ -319,7 +319,7 @@ void DFS(AMLGraph G, int v) {
 
 void DFSTraverse(AMLGraph G, Status(*vis)(VertexType)) {
     int v;
-    VisitFunc = vis;
+    Func = vis;
     for (v = 0; v < G.vexnum; v++) {
         visit[v] = FALSE;
     }
@@ -333,24 +333,24 @@ void DFSTraverse(AMLGraph G, Status(*vis)(VertexType)) {
 
 void BFSTraverse(AMLGraph G, Status(*Vi)(VertexType)) {
     int v, u, w;
-    VertexType  u1;
+    VertexType u1;
     LinkQueue Q;
     for (int i = 0; i < G.vexnum; i++) {
         visit[i] = FALSE;
     }
     InitQueue(Q);
     for (v = 0; v < G.vexnum; v++)
-        if (!visit[v]) // vå°šæœªè®¿é—®
+        if (!visit[v]) // vÉĞÎ´·ÃÎÊ
         {
-            visit[v] = TRUE; // è®¾ç½®è®¿é—®æ ‡å¿—ä¸ºTRUE(å·²è®¿é—®)
+            visit[v] = TRUE; // ÉèÖÃ·ÃÎÊ±êÖ¾ÎªTRUE(ÒÑ·ÃÎÊ)
             Vi(G.adjmulist[v].data);
-            EnQueue(Q, v); // vå…¥é˜Ÿåˆ—
-            while (!QueueEmpty(Q)) // é˜Ÿåˆ—ä¸ç©º
+            EnQueue(Q, v); // vÈë¶ÓÁĞ
+            while (!QueueEmpty(Q)) // ¶ÓÁĞ²»¿Õ
             {
-                DeQueue(Q, u); // é˜Ÿå¤´å…ƒç´ å‡ºé˜Ÿå¹¶ç½®ä¸ºu
+                DeQueue(Q, u); // ¶ÓÍ·ÔªËØ³ö¶Ó²¢ÖÃÎªu
                 u1 = GetVex(G, u);
                 for (w = FirstAdjVex(G, u1); w >= 0; w = NextAdjVex(G, u1, GetVex(G, w)))
-                    if (!visit[w]) // wä¸ºuçš„å°šæœªè®¿é—®çš„é‚»æ¥é¡¶ç‚¹çš„åºå·
+                    if (!visit[w]) // wÎªuµÄÉĞÎ´·ÃÎÊµÄÁÚ½Ó¶¥µãµÄĞòºÅ
                     {
                         visit[w] = TRUE;
                         Vi(G.adjmulist[w].data);
@@ -362,7 +362,3 @@ void BFSTraverse(AMLGraph G, Status(*Vi)(VertexType)) {
 }
 
 
-
-void MarkUnvizited(AMLGraph G);
-
-void Display(AMLGraph G);
