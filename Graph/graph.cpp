@@ -12,14 +12,16 @@
  * @return
  */
 bool visit[MAX_VERTEX_NUM]; // 访问标志数组(全局量)
-Status(*Func)(VertexType v);
+Status (*Func)(VertexType v);
+
 Status CreateGraph(AMLGraph &G) {
     int i, j, IncInfo;
     char s;
     VertexType va, vb;
     EBox *p;
-    printf("请输入无向图G的顶点数,边数,边是否含其它信息(是:1，否:0): ");
-    scanf("%d %d %d", &G.vexnum, &G.edgenum, &IncInfo);getchar();
+    printf("请输入无向图G的顶点数,边数,边是否含其它信息(是:1，否:0): \n");
+    scanf("%d %d %d", &G.vexnum, &G.edgenum, &IncInfo);
+    getchar();
     printf("请输入%d个顶点的值(一次1个字符):\n", G.vexnum);
     for (int m = 0; m < G.vexnum; ++m) {
         scanf("%c", &G.adjmulist[m].data);
@@ -28,7 +30,8 @@ Status CreateGraph(AMLGraph &G) {
     }
     printf("请顺序输入每条边的两个端点(以空格作为间隔):\n");
     for (int k = 0; k < G.edgenum; ++k) {
-        scanf("%c%c", &va, &vb);getchar();
+        scanf("%c%c", &va, &vb);
+        getchar();
         i = LocateVex(G, va);
         j = LocateVex(G, vb);
         p = (EBox *) malloc(sizeof(EBox));
@@ -69,6 +72,10 @@ VertexType GetVex(AMLGraph G, int v) {
 }
 
 Status PutVex(AMLGraph &G, VertexType v, VertexType value) {
+    if (G.vexnum == 0) {
+        printf("请先插入顶点");
+        return ERROR;
+    }
     int i;
     i = LocateVex(G, v);
     if (i < 0) {
@@ -91,7 +98,7 @@ int FirstAdjVex(AMLGraph G, VertexType v) {
             return G.adjmulist[i].firstedge->jvex;
         } else return G.adjmulist[i].firstedge->ivex;
     } else {
-        printf("没有邻接顶点");
+        // printf("没有邻接顶点");
         return ERROR;
     }
 }
@@ -110,7 +117,7 @@ int NextAdjVex(AMLGraph G, VertexType v, VertexType w) {
     while (p) {
         if (p->ivex == i && p->jvex != j) {
             p = p->ilink;
-        } else if (p->ivex == j && p->jvex != i) {
+        } else if (p->jvex == i && p->ivex != j) {
             p = p->jlink;
         } else break;
     }
@@ -130,7 +137,7 @@ int NextAdjVex(AMLGraph G, VertexType v, VertexType w) {
             return p->ivex;
         }
     }
-    return -1;
+    return ERROR;
 }
 
 Status InsertVex(AMLGraph &G, VertexType v) {
@@ -157,7 +164,7 @@ Status DeleteVex(AMLGraph &G, VertexType v) {
         //printf("没有此节点");
         return ERROR;
     }
-    for (int j = 0; j < G.vexnum; ++j) {
+    for (j = 0; j < G.vexnum; j++) {
         if (j == i)continue;
         e = GetVex(G, j);
         DeleteArc(G, v, e);
@@ -187,7 +194,7 @@ Status DeleteArc(AMLGraph &G, VertexType v, VertexType w) {
     i = LocateVex(G, v);
     j = LocateVex(G, w);
     if (i < 0 || j < 0 || i == j) {
-       // printf("顶点不存在");
+        // printf("顶点不存在");
         return ERROR;
     }
     p = G.adjmulist[i].firstedge;
@@ -195,44 +202,46 @@ Status DeleteArc(AMLGraph &G, VertexType v, VertexType w) {
         G.adjmulist[i].firstedge = p->ilink;
     } else if (p && p->ivex == j) {      //第一条即为
         G.adjmulist[i].firstedge = p->jlink;
-    }
-    while (p) {
-        if (p->ivex == i && p->jvex != j) {
-            q = p;
-            p = p->ilink;
-        } else if (p->jvex == i && p->ivex != j) {
-            q = p;
-            p = p->jlink;
-        } else {
-            break;
+    } else {
+        while (p) {
+            if (p->ivex == i && p->jvex != j) {
+                q = p;
+                p = p->ilink;
+            } else if (p->jvex == i && p->ivex != j) {
+                q = p;
+                p = p->jlink;
+            } else {
+                break;
+            }
+        }
+
+        if (p == NULL) {
+            //  printf("没有找到该弧");
+            return ERROR;
+        }
+        if (p->ivex == i && p->jvex == j) {
+            if (q->ivex == i) {
+                q->ilink = p->ilink;
+            } else {
+                q->jlink = p->ilink;
+            }
+        } else if (p->ivex == j && p->jvex == i) {
+            if (q->ivex == i) {
+                q->ilink = p->jlink;
+            } else {
+                q->jlink = p->jlink;
+            }
         }
     }
-    if (p == NULL) {
-        printf("没有找到该弧");
-        return ERROR;
-    }
-    if (p->ivex == i && p->jvex == j) {
-        if (q->ivex == i) {
-            q->ilink = p->ilink;
-        } else {
-            q->jlink = p->ilink;
-        }
-    } else if (p->jvex == i && p->ivex == j) {
-        if (q->ivex == i) {
-            q->ilink = p->jlink;
-        } else {
-            q->jlink = p->jlink;
-        }
-    }
-    p = G.adjmulist[j].firstedge;
+    p = G.adjmulist[j].firstedge;   //lingyige
     if (p->jvex == i) {
-        G.adjmulist[i].firstedge = p->ilink;
+        G.adjmulist[j].firstedge = p->ilink;
         free(p);
     } else if (p->ivex == i) {
         G.adjmulist[j].firstedge = p->jlink;
         free(p);
     } else {
-        while (p) // 向后查找弧<v,w>
+        while (p) {// 向后查找弧<v,w>
             if (p->ivex == j && p->jvex != i) // 不是待删除边
             {
                 q = p;
@@ -243,7 +252,7 @@ Status DeleteArc(AMLGraph &G, VertexType v, VertexType w) {
                 p = p->jlink; // 找下一个邻接顶点
             } else // 是邻接顶点v
                 break;
-
+        }
         if (p->ivex == i && p->jvex == j) // 找到弧<v,w>(情况1)
         {
             if (q->ivex == j)
@@ -278,6 +287,10 @@ Status InsertArc(AMLGraph &G, VertexType v, VertexType w) {
     int IncInfo;
     i = LocateVex(G, v);
     j = LocateVex(G, w);
+    // if (IsHave(G, v, w) == OK) {
+    //   printf("已存在");
+    //  return ERROR;
+    // }
     if (i < 0 || j < 0) {
         printf("没有找到");
         return ERROR;
@@ -300,6 +313,34 @@ Status InsertArc(AMLGraph &G, VertexType v, VertexType w) {
     }
     G.edgenum++;
     return OK;
+}
+
+Status IsHave(AMLGraph G, VertexType v, VertexType w) {
+    int i, j;
+    int flag = 0;
+    i = LocateVex(G, v);
+    j = LocateVex(G, w);
+    EBox *p;
+    for (int k = 0; i < G.vexnum; ++k) {
+        p = G.adjmulist[k].firstedge;
+        while (p) {
+            if (p->ivex == i && p->jvex == j) {
+                flag = 1;
+                break;
+            }
+            if (p->jvex == i && p->ivex == j) {
+                flag = 1;
+                break;
+            }
+        }
+        if (flag == 1) {
+            break;
+        }
+    }
+    if (flag == 1) {
+        return OK;
+    }
+    return ERROR;
 }
 
 void DFS(AMLGraph G, int v) {

@@ -109,6 +109,7 @@ Status DeleteVex(AMLGraph &G,VertexType v);
  * @param G
  */
 void DestroyGraph(AMLGraph &G);
+Status IsHave(AMLGraph G,VertexType v,VertexType w);
 Status InsertArc(AMLGraph &G,VertexType v,VertexType w);
 /**
  *
