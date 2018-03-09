@@ -20,3 +20,12 @@
 ### longestPalindrome 
 > https://github.com/badcyc/dataStructure/blob/algo/LongestPalindrome.java
     
+    
+## 3/9
+
+- autoi
+
+- palindromeNumber
+
+revert half of origin(condition: origin<revertNumber)
+> https://leetcode/problems/palindrome-number/solution/
