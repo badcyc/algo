@@ -47,6 +47,7 @@ among a string q and S. This LCP query will be called frequently.
  The only question left, is how to find the deepest path in the Trie, that fulfills the requirements above. The most effective way is to build a trie from [S_1 \ldots S_n][S
 {S1,S2,S3..Sn} strings. Then find the prefix of query string q in the Trie. We traverse the Trie from the root, till it is impossible to continue the path in the Trie because one of the conditions above is not satisfied.
  ![pic1](img/1.png)
+ 
  Finding the longest common prefix using Trie
  
  Figure 4. Finding the longest common prefix of strings using Trie
