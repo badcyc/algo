@@ -1,6 +1,6 @@
-package AVLtree;
+package AVLtree.AVL;
 
-
+import AVLtree.ITree;
 
 public class AVLTree<T extends Comparable> implements ITree<T> {
 

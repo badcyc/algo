@@ -1,4 +1,4 @@
-package AVLtree;
+package AVLtree.AVL;
 
 public interface ITree<T extends Comparable> {
     boolean isEmpty();

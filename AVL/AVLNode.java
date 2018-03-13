@@ -1,4 +1,4 @@
-package AVLtree;
+package AVLtree.AVL;
 
 public class AVLNode<T extends Comparable> {
     public AVLNode<T> left;
