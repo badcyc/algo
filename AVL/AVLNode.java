@@ -1,4 +1,4 @@
-package AVLtree.AVL;
+package dataStructure.AVL;
 
 public class AVLNode<T extends Comparable> {
     public AVLNode<T> left;

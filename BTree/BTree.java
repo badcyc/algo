@@ -1,4 +1,4 @@
-package AVLtree.BTree;
+package dataStructure.BTree;
 
 
 import javafx.beans.binding.ObjectExpression;
