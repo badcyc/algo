@@ -1244,7 +1244,7 @@ int print_now_person() {
     for (int i = 0; i < 20; i++) {
         if (personList[i] == NULL) continue;
         ans = i + 1;
-        printf("第%d位用户为 : %s\n", ans, personList[i]->Myinfo.name);
+       // printf("第%d位用户为 : %s\n", ans, personList[i]->Myinfo.name);
     }
     if (ans == 0) {
         printf("当前还无用户！！\n");
@@ -1252,12 +1252,24 @@ int print_now_person() {
     return ans;
 }
 
+void print_now_person2(){
+    int ans = 0;
+    for (int i = 0; i < 20; i++) {
+        if (personList[i] == NULL) continue;
+        ans = i + 1;
+        printf("第%d位用户为 : %s\n", ans, personList[i]->Myinfo.name);
+    }
+    if (ans == 0) {
+        printf("当前还无用户！！\n");
+    }
+}
+
 /*函数功能：  添加一位用户
   参数：  void
   返回值： void
 */
 void Insert_A_Person() {
-    printf("现有用户数据如下：\n");
+   // printf("现有用户数据如下：\n");
     int now = print_now_person();
     printf("--------------------------------\n");
     info temp;
@@ -1292,7 +1304,7 @@ void Insert_A_Person() {
   返回值： void
 */
 void Delete_A_Person() {
-    printf("现有用户数据如下：\n");
+  //  printf("现有用户数据如下：\n");
     int now = print_now_person();
     printf("--------------------------------\n");
     int del;
@@ -1322,7 +1334,7 @@ void Delete_A_Person() {
   返回值： void
 */
 void Make_Friends() {
-    printf("现有用户数据如下：\n");
+  //  printf("现有用户数据如下：\n");
     int now = print_now_person();
     printf("--------------------------------\n");
     int per1, per2;
@@ -1349,7 +1361,7 @@ void Make_Friends() {
   返回值： void
 */
 void Remove_Friends() {
-    printf("现有用户数据如下：\n");
+    //printf("现有用户数据如下：\n");
     int now = print_now_person();
     printf("--------------------------------\n");
     int per1, per2;
@@ -1376,7 +1388,7 @@ void Remove_Friends() {
   返回值： void
 */
 void Search_Friends() {
-    printf("现有用户数据如下：\n");
+   // printf("现有用户数据如下：\n");
     int now = print_now_person();
     printf("--------------------------------\n");
     int per1, per2;
@@ -1402,7 +1414,7 @@ void Search_Friends() {
   返回值： void
 */
 void Add_A_Fans() {
-    printf("现有用户数据如下：\n");
+  //  printf("现有用户数据如下：\n");
     int now = print_now_person();
     printf("--------------------------------\n");
     int per1, per2;
@@ -1429,7 +1441,7 @@ void Add_A_Fans() {
   返回值： void
 */
 void Remove_Fans() {
-    printf("现有用户数据如下：\n");
+  //  printf("现有用户数据如下：\n");
     int now = print_now_person();
     printf("--------------------------------\n");
     int per1, per2;
@@ -1456,7 +1468,7 @@ void Remove_Fans() {
   返回值： void
 */
 void Search_Fans() {
-    printf("现有用户数据如下：\n");
+   // printf("现有用户数据如下：\n");
     int now = print_now_person();
     printf("--------------------------------\n");
     int per1, per2;
@@ -1482,7 +1494,7 @@ void Search_Fans() {
   返回值： void
 */
 void Commom_Fans() {
-    printf("现有用户数据如下：\n");
+    //printf("现有用户数据如下：\n");
     int now = print_now_person();
     printf("--------------------------------\n");
     int per1, per2;
@@ -1504,7 +1516,7 @@ void Commom_Fans() {
   返回值： void
 */
 void Commom_Idols() {
-    printf("现有用户数据如下：\n");
+   // printf("现有用户数据如下：\n");
     int now = print_now_person();
     printf("--------------------------------\n");
     int per1, per2;
@@ -1526,7 +1538,7 @@ void Commom_Idols() {
   返回值： void
 */
 void TwoDFriends() {
-    printf("现有用户数据如下：\n");
+   // printf("现有用户数据如下：\n");
     int now = print_now_person();
     printf("--------------------------------\n");
     int per1;
@@ -1665,7 +1677,9 @@ int main() {
                 op1 = 1;
                 while (op1) {
                     system("cls");
+                    system("mode con:cols=150 lines=160");
                     printf("\n\n");
+
                     printf("                                         AVL                                 \n");
                     printf("----------------------------------------------------------------------------------\n");
                     printf("                |                                                            |\n");
@@ -1859,9 +1873,9 @@ int main() {
                             scanf("%d%*c", &key);
                             printf("\n");
                             if (set_member(T, key, &Ts))
-                                printf("Yes!\n");
+                                printf("%d是该集合的元素!\n",key);
                             else
-                                printf("No!\n");
+                                printf("%d不是该集合的元素!\n",key);
                             break;
                         }
 
@@ -1876,9 +1890,9 @@ int main() {
                             if (load_data(&T1, filename))
                             {
                                 if (set_subset(T, T1))
-                                    printf("Yes!\n");
+                                    printf("是当前集合的子集!\n");
                                 else
-                                    printf("No!\n");
+                                    printf("不是当前集合的子集!\n");
                             }
                             else
                                 printf("Failed to load!\n");
@@ -1895,9 +1909,9 @@ int main() {
                             if (load_data(&T1, filename))
                             {
                                 if (set_equal(T, T1))
-                                    printf("Yes!\n");
+                                    printf("两个集合相同!\n");
                                 else
-                                    printf("No!\n");
+                                    printf("两个集合不同!\n");
                             }
                             else
                                 printf("Failed to load!\n");
@@ -1962,7 +1976,8 @@ int main() {
                     printf("|   	           7. Relive_AFans       8. SearchFans                          |\n");
                     printf("|   	           9. Common_Fans        10. Commom_idols                       |\n");
                     printf("|   	           11. Friend's_Friends  12.Save                                |\n");
-                    printf("|   	           13.Load               0. Exit                                |\n");
+                    printf("|   	           13.Load               14. print_all_person                   |\n");
+                    printf("|                  0. Exit\n");
                     printf("---------------------------------------------------------------------------------\n");
                     printf("                  请选择你的操作[0~13]:");
                     scanf("%d", &op3);
@@ -2033,6 +2048,11 @@ int main() {
                             getchar();
                             getchar();
                             break;
+                        case 14:
+                            print_now_person2();
+
+                            getchar();
+                            getchar();
                         case 0:
                             printf("返回主界面\n");
                             break;
