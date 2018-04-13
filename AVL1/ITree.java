@@ -1,4 +1,4 @@
-package  dataStructure.AVL;
+package  dataStructure.AVL1;
 
 public interface ITree<T extends Comparable> {
     boolean isEmpty();

@@ -1,4 +1,4 @@
-package  dataStructure.AVL;
+package  dataStructure.AVL1;
 
 
 public class AVLTree<T extends Comparable> implements ITree<T> {
