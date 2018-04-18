@@ -1,9 +1,5 @@
 package leetcode;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.Map;
-
 public class RemoveDuplicates {
     public int removeDuplicates(int[] nums) {
         if (nums.length == 0) return 0;
