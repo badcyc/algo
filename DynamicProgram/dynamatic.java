@@ -10,7 +10,7 @@ import java.util.HashMap;
  **/
 public class dynamatic {
     /**
-     * @Description: 动态规划 自顶向下
+     * @Description: 递归 自顶向下
      * @Param: [p, r]　p 代表收益，r 代表剩下的长度
      * @return: int　返回最大收益
      * @Author: Yichao Chen
@@ -28,6 +28,7 @@ public class dynamatic {
         return max;
     }
 
+    /////////////////////////////////////////////////////////////////////////////////
     /**
      * @Description: 自顶向下　带备忘录
      * @Param: [p, r]参数返回值如上
@@ -35,7 +36,7 @@ public class dynamatic {
      * @Author: Yichao Chen
      * @Date: 18-10-29
      * @Time: 下午5:10
-     **/
+     */
     public static HashMap<Integer, Integer> maxValue = new HashMap<Integer, Integer>();
 
     public static int topDownWithMem(int[] p, int r) {
@@ -52,6 +53,14 @@ public class dynamatic {
         return max;
     }
 
+    /**
+     * @Description: 带备忘录的自底向上
+     * @Param: [p, r]
+     * @return: int
+     * @Author: Yichao Chen
+     * @Date: 18-10-30
+     * @Time: 上午10:44
+     **/
     public static int BottomUpWithMem(int[] p, int r) {
         HashMap<Integer, Integer> rMax = new HashMap<>();
         int max = -1;
@@ -88,6 +97,8 @@ public class dynamatic {
         }
         return max;
     }
+
+//    public static int
 
     public static int stringSplit(String content, int[] m, int first, int end) {
         int min = Integer.MIN_VALUE;
