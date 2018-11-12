@@ -45,7 +45,7 @@ public class ClosestPair {
      * @Time: 下午4:02
      **/
     private int compareX(Point a, Point b) {
-        return a.x < b.x ? 1 : -1;
+        return a.x < b.x ? -1 : 1;
     }
 
     /**
@@ -57,7 +57,7 @@ public class ClosestPair {
      * @Time: 下午4:02
      **/
     private int compareY(Point a, Point b) {
-        return a.y < b.y ? 1 : -1;
+        return a.y < b.y ? -1 : 1;
     }
 
     private int compareXY(Point a, Point b) {
@@ -121,10 +121,10 @@ public class ClosestPair {
             }
             if (d == d3) {
                 if (distanceOfPoints(a, b) > d3) {
-                    a.x = points[0].x;
-                    a.y = points[0].y;
-                    b.x = points[1].x;
-                    b.y = points[1].y;
+                    a.x = points[1].x;
+                    a.y = points[1].y;
+                    b.x = points[2].x;
+                    b.y = points[2].y;
                 }
                 return d3;
             }
@@ -133,7 +133,7 @@ public class ClosestPair {
         double ld;
         double rd;
         double distance;
-        int lLength = (points.length - 1) / 2;
+        int lLength = (points.length-1) / 2;
         double mid;
         mid = points[lLength].x;
         Point[] lps = new Point[lLength];
@@ -156,7 +156,7 @@ public class ClosestPair {
         //todo
         int i = lLength;
         int k = 0;
-        while (i >= 0 && mid - points[i].x >= distance) {
+        while (i >= 0 && mid - points[i].x <= distance) {
             k++;
             i--;
         }
@@ -168,7 +168,7 @@ public class ClosestPair {
         Point[] points3 = new Point[k];
         i = lLength;
         k = 0;
-        while (i >= 0 && mid - points[i].x >= distance) {
+        while (i >= 0 && mid - points[i].x <= distance) {
             points3[k++] = points[i];
             i--;
         }
@@ -203,21 +203,37 @@ public class ClosestPair {
     }
 
     public static void main(String[] ar) {
-        Point[] points = new Point[5];
+        Point[] points = new Point[7];
         Random random = new Random();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 7; i++) {
             points[i] = new Point();
         }
-        points[0].x = 0;
-        points[0].y = 1;
-        points[1].x = 2;
-        points[1].y = 5;
-        points[2].x = -1;
-        points[2].y = 6;
-        points[3].x = -1;
-        points[3].y = -2;
-        points[4].x = 3;
-        points[4].y = 5;
+        points[0].x = 12;
+        points[0].y = 10;
+
+        points[1].x = 74;
+        points[1].y = 1;
+
+        points[2].x =23;
+        points[2].y = 45;
+
+        points[3].x = 89;
+        points[3].y = 78;
+
+        points[4].x = 47;
+        points[4].y = 23;
+
+        points[5].x = 54;
+        points[5].y = 12;
+
+        points[6].x = 80;
+        points[6].y = 33;
+//
+//        points[7].x = 2;
+//        points[7].y = -2;
+//
+//        points[8].x = 5;
+//        points[8].y = 7;
 
 
         ClosestPair closestPair = new ClosestPair();
